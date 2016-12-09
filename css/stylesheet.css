@@ -3,7 +3,7 @@
 .welcome {text-align: center;
 	font-family: 'Nunito', sans-serif;
 	font-size: 1em;
-	color: White;
+	color: rgba(6, 41, 61, 1);
 	}	
 
 
@@ -15,18 +15,13 @@
 	
 .Indexheader {text-align: center;
 	font-family: 'Nunito', sans-serif;
-	color: rgba(6, 41, 61, 1);
-	}
-
-.welcome {text-align: center;
-	font-family: 'Nunito', sans-serif;
-	color: rgba(6, 41, 61, 1);
+	color: rgba(6, 41, 61, 1) !important;
 	}
 	
 	
 	
 body.front {
-background-image: url(bgimage3.jpg); /*You will specify your image path here.*/
+background-image: url(bgimage3.jpg) !important ; /*You will specify your image path here.*/
 
 -moz-background-size: cover;
 -webkit-background-size: cover;
