@@ -62,7 +62,7 @@ $stmt->execute();
       </div>
 	  
 	<div class="form-group" id="email">
-        <input class="form-input" tooltip-class="email-tooltip" placeholder="E-mail" name = "email" required="true"></input>
+        <input class="form-input" type = "email" tooltip-class="email-tooltip" placeholder="E-mail" name = "email" required="true"></input>
         <span id="email-tool"class="tooltip email-tooltip">Enter Your Email Id</span>
 		</div>
 		
