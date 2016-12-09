@@ -19,7 +19,11 @@ $stmt->bind_param("s", $userid);
 
 $userid = $_POST["user_id"];
 $password = password_hash($_POST["password"],PASSWORD_DEFAULT);
-$stmt - > execute();
+$stmt -> execute();
+
+$sql = $conn->prepare("UPDATE Users SET logintime=NOW() WHERE u_name=?";);
+$sql->bind_param("s", $userid);
+
 
 $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -28,7 +32,7 @@ if($stmt->rowCount() > 0)
              if(password_verify($upass, $userRow['password']))
              {
                 $_SESSION['user_session'] = $userRow['user_id'];
-                return true;
+                $sql -> execute();
              }
              else
              {
@@ -65,7 +69,7 @@ else
 <h1 class = "header"> TravelPad </h1>
 <div class="container">
   <div class="form-container flip">
-	<form class = "login-form" action="" method="post">
+	<form class = "login-form" action="welcome.php" method="post">
 
 	<h3 class="title">Hello. Welcome Back !</h3>
 		<div class="form-group" id="username">
