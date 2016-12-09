@@ -53,12 +53,12 @@ $stmt->execute();
 	<h3 class="title">Sign up here.</h3>
 		<div class="form-group" id="username">
         <input class="form-input" tooltip-class="username-tooltip" placeholder="Username" name = "user_id" pattern="[a-zA-Z0-9]" required="true"></input>
-        <span id="username-tool"class="tooltip username-tooltip">Choose a Username</span>
+        <span id="username-tool"class="tooltip username-tooltip">Numbers and Alphabets Only</span>
 		</div>
 		
 		<div class="form-group" id="password">
         <input type="password" class="form-input" name = "password" tooltip-class="password-tooltip" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required="true"></input>
-        <span class="tooltip password-tooltip">Enter your password?</span>
+        <span class="tooltip password-tooltip">Be atleast 8 Characters with one lowercase, one uppercase, & one number ?</span>
       </div>
 	  
 	<div class="form-group" id="email">
