@@ -1,3 +1,56 @@
+<?php
+
+if(isset($_POST['submit'])){
+
+$servername = "dbclassinstance.czhkgr2thr8b.us-east-2.rds.amazonaws.com:3306";
+$username = "visheshkakarala";
+$password = "kakarala";
+$dbname = "socnet";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+$stmt = $conn->prepare("Select * from `socnet`.`Users` where u_name = ?;");
+$stmt->bind_param("s", $userid);
+
+$userid = $_POST["user_id"];
+$password = password_hash($_POST["password"],PASSWORD_DEFAULT);
+$stmt - > execute();
+
+$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+
+if($stmt->rowCount() > 0)
+          {
+             if(password_verify($upass, $userRow['password']))
+             {
+                $_SESSION['user_session'] = $userRow['user_id'];
+                return true;
+             }
+             else
+             {
+                print '<script type="text/javascript">'; 
+				print 'alert("Login Failed password incorrect")'; 
+				print '</script>';  ;
+             }
+          }
+else
+	{
+				print '<script type="text/javascript">'; 
+				print 'alert("User Id does not exist")'; 
+				print '</script>';  ;
+	
+	}
+
+
+}
+
+
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -12,7 +65,7 @@
 <h1 class = "header"> TravelPad </h1>
 <div class="container">
   <div class="form-container flip">
-	<form class = "login-form" action="welcome.php" method="post">
+	<form class = "login-form" action="" method="post">
 
 	<h3 class="title">Hello. Welcome Back !</h3>
 		<div class="form-group" id="username">

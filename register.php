@@ -1,6 +1,6 @@
 <?php
 
-echo $_POST["DOB"];
+if(isset($_POST['submit'])){
 
 $servername = "dbclassinstance.czhkgr2thr8b.us-east-2.rds.amazonaws.com:3306";
 $username = "visheshkakarala";
@@ -21,14 +21,14 @@ $stmt->bind_param("sssssss", $userid, $password, $email, $dob, $country, $pictur
 
 // set parameters and execute
 $userid = $_POST["user_id"];
-$password = $_POST["password"];
+$password = password_hash($_POST["password"],PASSWORD_DEFAULT);
 $email = $_POST["email"];
 $dob = date('Y-m-d', strtotime($_POST['DOB']));
 $country = $_POST["country"];
 $pictureurl = "URL";
 $logintime = date("Y-m-d H:i:s");
 $stmt->execute();
-
+}
 ?>
 
 
@@ -322,7 +322,7 @@ $stmt->execute();
 
 	
       <div class="form-group">
-		<input type="submit" class="login-button" value = "Login">
+		<input type="submit" class="login-button" value = "Login" name = "submit">
 		
 		</div>
 		</form>
