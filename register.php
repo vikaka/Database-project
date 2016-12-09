@@ -58,7 +58,7 @@ $stmt->execute();
 		
 		<div class="form-group" id="password">
         <input type="password" class="form-input" name = "password" tooltip-class="password-tooltip" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required="true"></input>
-        <span class="tooltip password-tooltip">Be atleast 8 Characters with one lowercase, one uppercase, & one number ?</span>
+        <span class="tooltip password-tooltip">Minimum 8[A-Z,0-9,uppercase,lowercase] ?</span>
       </div>
 	  
 	<div class="form-group" id="email">
