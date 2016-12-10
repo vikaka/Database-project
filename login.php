@@ -73,12 +73,12 @@ else
 
 	<h3 class="title">Hello. Welcome Back !</h3>
 		<div class="form-group" id="username">
-        <input class="form-input" tooltip-class="username-tooltip" placeholder="Username" name = "user_id" required="true"></input>
+        <input class="form-input" tooltip-class="username-tooltip" placeholder="Username" name = "user_id" pattern="[a-zA-Z0-9]+" required="true"></input>
         <span id="username-tool"class="tooltip username-tooltip">What's your username?</span>
 		</div>
 		
 		<div class="form-group" id="password">
-        <input type="password" class="form-input" name = "password" tooltip-class="password-tooltip" placeholder="Password"></input>
+        <input type="password" class="form-input" name = "password" tooltip-class="password-tooltip" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$"></input>
         <span class="tooltip password-tooltip">What's your password?</span>
       </div>
       <div class="form-group">

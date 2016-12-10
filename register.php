@@ -48,7 +48,7 @@ $stmt->execute();
 
 <div class="container">
   <div class="form-container flip">
-	<form class = "login-form" action="" method="post">
+	<form class = "login-form" action="welcome.php" method="post">
 
 	<h3 class="title">Sign up here.</h3>
 		<div class="form-group" id="username">
@@ -57,8 +57,7 @@ $stmt->execute();
 		</div>
 		
 		<div class="form-group" id="password">
-        <input type="password" class="form-input" name = "password" tooltip-class="password-tooltip" placeholder="Password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$
-" required="true"></input>
+        <input type="password" class="form-input" name = "password" tooltip-class="password-tooltip" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" required="true"></input>
         <span class="tooltip password-tooltip">Minimum 8[Must contain A-Z,a-z & 0-9]</span>
       </div>
 	  
@@ -323,7 +322,7 @@ $stmt->execute();
 
 	
       <div class="form-group">
-		<input type="submit" class="login-button" value = "Login" name = "submit">
+		<input type="submit" class="login-button" value = "Register" name = "submit">
 		
 		</div>
 		</form>
