@@ -14,27 +14,28 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$stmt = $conn->prepare("Select * from `socnet`.`Users` where u_name = ?;");
-$stmt->bind_param("s", $userid);
 
 $userid = $_POST["user_id"];
-$upass = password_hash($_POST["password"],PASSWORD_DEFAULT);
-$stmt -> execute();
+$upass = hash('sha256',$_POST["password"]);
+
+$stmt = "select * from Users where u_name = '$userid'";
+$result = mysqli_query($conn, $stmt);
 
 
+$row = mysqli_fetch_assoc($result);
 
 
-$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+$_SESSION['passwrd'] = $row["password"];
 
-if($stmt->rowCount() > 0)
+if(mysqli_num_rows($result) > 0)
           {
-             if(password_verify($upass, $userRow['password']))
+			  
+             if($upass == $row["password"])
              {
-                $_SESSION['user_session'] = $userRow['user_id'];
-				$sql = $conn->prepare("UPDATE `socnet`.`Users` SET `login_timestamp`=Now() WHERE `u_name`= userid;");
-				$sql->bind_param(":userid", $userid);
-                $sql -> execute();
-				header( "Location: welcome.php" );
+                $_SESSION['user_session'] = $userid;
+				$sql = "UPDATE `socnet`.`Users` SET `login_timestamp`=Now() WHERE `u_name`= '$userid';";
+				$up_time = mysqli_query($conn,$sql);
+                header( "Location: welcome.php" );
              }
              else
              {

@@ -16,31 +16,23 @@ if ($conn->connect_error) {
 }
 
 $userid = $_POST["user_id"];
-$upass = password_hash($_POST["password"],PASSWORD_DEFAULT);
+$upass = hash('sha256',$_POST["password"]);
 $email = $_POST["email"];
 $dob = date('Y-m-d', strtotime($_POST['DOB']));
 $country = $_POST["country"];
 $pictureurl = "URL";
 $logintime = date("Y-m-d H:i:s");
 
-         $stmt1 = $conn->prepare("SELECT u_name,email FROM Users WHERE u_name = userid OR email= email");
-         $stmt1->bind_param(":userid", $userid);
-		 $stmt1->bind_param(":email", $email);
-		 
-		 $row=$stmt->fetch(PDO::FETCH_ASSOC);
-    
-         if($row['u_name']==$userid) {
-            header( "Location: error.php" );
-         }
-         else if($row['email']==$email) {
-            header( "Location: error.php" );
-         }
-         else
-         {
+         
 		 $stmt = $conn->prepare("INSERT INTO `socnet`.`Users` (`u_name`, `password`, `email`,`dob`,`Country`,`Picture`,`login_timestamp`) VALUES (?, ?, ?, ?, ?, ?, ?);");
 		 $stmt->bind_param("sssssss", $userid, $upass, $email, $dob, $country, $pictureurl, $logintime);
-		 $stmt->execute();
+		 if($stmt->execute())
+		 {
 		 header( "Location: welcome.php" );
+		 }
+		 else 
+		 {
+		 header( "Location: error.php" );	 
 		 }
 // set parameters and execute
 
