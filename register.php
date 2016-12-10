@@ -25,27 +25,28 @@ $logintime = date("Y-m-d H:i:s");
 
 try
       {
-         $stmt1 = $conn->prepare("SELECT u_name,email FROM Users WHERE u_name = ? OR email= ?");
-         $stmt1->bind_param("aa", $userid, $email);
+         $stmt1 = $conn->prepare("SELECT u_name,email FROM Users WHERE u_name = userid OR email= email");
+         $stmt1->bind_param(":userid", $userid);
+		 $stmt1->bind_param(":email", $email);
 		 
 		 $row=$stmt->fetch(PDO::FETCH_ASSOC);
     
          if($row['u_name']==$userid) {
-            $error[] = "sorry username already taken !";
+            header( "Location: error.php" );
          }
          else if($row['email']==$email) {
-            $error[] = "sorry email id already taken !";
+            header( "Location: error.php" );
          }
          else
          {
 		 $stmt = $conn->prepare("INSERT INTO `socnet`.`Users` (`u_name`, `password`, `email`,`dob`,`Country`,`Picture`,`login_timestamp`) VALUES (?, ?, ?, ?, ?, ?, ?);");
 		 $stmt->bind_param("sssssss", $userid, $password, $email, $dob, $country, $pictureurl, $logintime);
 		 $stmt->execute();
-		 $_SESSION["username"] = $userid;
 		 header( "Location: welcome.php" );
 		 }
 // set parameters and execute
 
+}
 }
 ?>
 
@@ -341,11 +342,9 @@ try
 
 	
       <div class="form-group">
-<<<<<<< HEAD
+
 		<input type="submit" class="login-button" value = "Register" name = "register">
-=======
-		<input type="submit" class="login-button" value = "Login" name = "submit">
->>>>>>> parent of fabc829... Pattern check works finally
+
 		
 		</div>
 		</form>

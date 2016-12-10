@@ -21,8 +21,8 @@ $userid = $_POST["user_id"];
 $password = password_hash($_POST["password"],PASSWORD_DEFAULT);
 $stmt -> execute();
 
-$sql = $conn->prepare("UPDATE `socnet`.`Users` SET `login_timestamp`=Now() WHERE `u_name`=?;");
-$sql->bind_param("a", $userid);
+$sql = $conn->prepare("UPDATE `socnet`.`Users` SET `login_timestamp`=Now() WHERE `u_name`= userid;");
+$sql->bind_param(":userid", $userid);
 
 
 $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -37,16 +37,12 @@ if($stmt->rowCount() > 0)
              }
              else
              {
-                print '<script type="text/javascript">'; 
-				print 'alert("Login Failed password incorrect")'; 
-				print '</script>';  ;
+                header( "Location: errorlogin.php" );
              }
           }
 else
 	{
-				print '<script type="text/javascript">'; 
-				print 'alert("User Id does not exist")'; 
-				print '</script>';  ;
+				header( "Location: errorlogin.php" );
 	
 	}
 
