@@ -16,15 +16,13 @@ if ($conn->connect_error) {
 }
 
 $userid = $_POST["user_id"];
-$password = password_hash($_POST["password"],PASSWORD_DEFAULT);
+$upass = password_hash($_POST["password"],PASSWORD_DEFAULT);
 $email = $_POST["email"];
 $dob = date('Y-m-d', strtotime($_POST['DOB']));
 $country = $_POST["country"];
 $pictureurl = "URL";
 $logintime = date("Y-m-d H:i:s");
 
-try
-      {
          $stmt1 = $conn->prepare("SELECT u_name,email FROM Users WHERE u_name = userid OR email= email");
          $stmt1->bind_param(":userid", $userid);
 		 $stmt1->bind_param(":email", $email);
@@ -40,13 +38,13 @@ try
          else
          {
 		 $stmt = $conn->prepare("INSERT INTO `socnet`.`Users` (`u_name`, `password`, `email`,`dob`,`Country`,`Picture`,`login_timestamp`) VALUES (?, ?, ?, ?, ?, ?, ?);");
-		 $stmt->bind_param("sssssss", $userid, $password, $email, $dob, $country, $pictureurl, $logintime);
+		 $stmt->bind_param("sssssss", $userid, $upass, $email, $dob, $country, $pictureurl, $logintime);
 		 $stmt->execute();
 		 header( "Location: welcome.php" );
 		 }
 // set parameters and execute
 
-}
+
 }
 ?>
 

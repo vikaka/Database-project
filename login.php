@@ -18,11 +18,10 @@ $stmt = $conn->prepare("Select * from `socnet`.`Users` where u_name = ?;");
 $stmt->bind_param("s", $userid);
 
 $userid = $_POST["user_id"];
-$password = password_hash($_POST["password"],PASSWORD_DEFAULT);
+$upass = password_hash($_POST["password"],PASSWORD_DEFAULT);
 $stmt -> execute();
 
-$sql = $conn->prepare("UPDATE `socnet`.`Users` SET `login_timestamp`=Now() WHERE `u_name`= userid;");
-$sql->bind_param(":userid", $userid);
+
 
 
 $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -32,6 +31,8 @@ if($stmt->rowCount() > 0)
              if(password_verify($upass, $userRow['password']))
              {
                 $_SESSION['user_session'] = $userRow['user_id'];
+				$sql = $conn->prepare("UPDATE `socnet`.`Users` SET `login_timestamp`=Now() WHERE `u_name`= userid;");
+				$sql->bind_param(":userid", $userid);
                 $sql -> execute();
 				header( "Location: welcome.php" );
              }
