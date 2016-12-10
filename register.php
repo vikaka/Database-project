@@ -41,6 +41,7 @@ try
 		 $stmt = $conn->prepare("INSERT INTO `socnet`.`Users` (`u_name`, `password`, `email`,`dob`,`Country`,`Picture`,`login_timestamp`) VALUES (?, ?, ?, ?, ?, ?, ?);");
 		 $stmt->bind_param("sssssss", $userid, $password, $email, $dob, $country, $pictureurl, $logintime);
 		 $stmt->execute();
+		 $_SESSION["username"] = $userid;
 		 header( "Location: welcome.php" );
 		 }
 // set parameters and execute
@@ -346,6 +347,21 @@ try
                foreach($error as $error)
                {
                   ?>
+                  <div class="alert alert-danger">
+                      <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?>
+                  </div>
+                  <?php
+               }
+            }
+            else if(isset($_SESSION['username']))
+            {
+                 ?>
+                 <div class="alert alert-info">
+                      <i class="glyphicon glyphicon-log-in"></i> &nbsp; Successfully registered <a href='login.php'>login</a> here
+                 </div>
+                 <?php
+            }
+            ?>
 		</div>
 		</form>
 	
