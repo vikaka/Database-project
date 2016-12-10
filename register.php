@@ -75,7 +75,8 @@ try
 		</div>
 		
 		<div class="form-group" id="password">
-        <input type="password" class="form-input" name = "password" tooltip-class="password-tooltip" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" required="true"></input>
+        <input type="password" class="form-input" name = "password" tooltip-class="password-tooltip" placeholder="Password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$
+" required="true"></input>
         <span class="tooltip password-tooltip">Minimum 8[Must contain A-Z,a-z & 0-9]</span>
       </div>
 	  
@@ -340,7 +341,11 @@ try
 
 	
       <div class="form-group">
+<<<<<<< HEAD
 		<input type="submit" class="login-button" value = "Register" name = "register">
+=======
+		<input type="submit" class="login-button" value = "Login" name = "submit">
+>>>>>>> parent of fabc829... Pattern check works finally
 		
 		</div>
 		</form>
