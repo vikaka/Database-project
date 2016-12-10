@@ -341,27 +341,7 @@ try
 	
       <div class="form-group">
 		<input type="submit" class="login-button" value = "Register" name = "register">
-		<?php
-            if(isset($error))
-            {
-               foreach($error as $error)
-               {
-                  ?>
-                  <div class="alert alert-danger">
-                      <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?>
-                  </div>
-                  <?php
-               }
-            }
-            else if(isset($_SESSION['username']))
-            {
-                 ?>
-                 <div class="alert alert-info">
-                      <i class="glyphicon glyphicon-log-in"></i> &nbsp; Successfully registered <a href='login.php'>login</a> here
-                 </div>
-                 <?php
-            }
-            ?>
+		
 		</div>
 		</form>
 	

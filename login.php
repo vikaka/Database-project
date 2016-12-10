@@ -21,7 +21,7 @@ $userid = $_POST["user_id"];
 $password = password_hash($_POST["password"],PASSWORD_DEFAULT);
 $stmt -> execute();
 
-$sql = $conn->prepare("UPDATE Users SET login_timestamp=NOW() WHERE u_name=?;");
+$sql = $conn->prepare("UPDATE `socnet`.`Users` SET `login_timestamp`=Now() WHERE `u_name`=?;");
 $sql->bind_param("a", $userid);
 
 
