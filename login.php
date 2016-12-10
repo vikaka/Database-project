@@ -21,8 +21,8 @@ $userid = $_POST["user_id"];
 $password = password_hash($_POST["password"],PASSWORD_DEFAULT);
 $stmt -> execute();
 
-$sql = $conn->prepare("UPDATE Users SET logintime=NOW() WHERE u_name=?;");
-$sql->bind_param("s", $userid);
+$sql = $conn->prepare("UPDATE Users SET login_timestamp=NOW() WHERE u_name=?;");
+$sql->bind_param("a", $userid);
 
 
 $userRow=$stmt->fetch(PDO::FETCH_ASSOC);

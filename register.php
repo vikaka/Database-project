@@ -26,7 +26,7 @@ $logintime = date("Y-m-d H:i:s");
 try
       {
          $stmt1 = $conn->prepare("SELECT u_name,email FROM Users WHERE u_name = ? OR email= ?");
-         $stmt1->bind_param("ss", $userid, $email);
+         $stmt1->bind_param("aa", $userid, $email);
 		 
 		 $row=$stmt->fetch(PDO::FETCH_ASSOC);
     
