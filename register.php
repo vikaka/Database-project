@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_POST['submit'])){
+if(isset($_POST['register'])){
 
 $servername = "dbclassinstance.czhkgr2thr8b.us-east-2.rds.amazonaws.com:3306";
 $username = "visheshkakarala";
@@ -15,11 +15,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// prepare and bind
-$stmt = $conn->prepare("INSERT INTO `socnet`.`Users` (`u_name`, `password`, `email`,`dob`,`Country`,`Picture`,`login_timestamp`) VALUES (?, ?, ?, ?, ?, ?, ?);");
-$stmt->bind_param("sssssss", $userid, $password, $email, $dob, $country, $pictureurl, $logintime);
-
-// set parameters and execute
 $userid = $_POST["user_id"];
 $password = password_hash($_POST["password"],PASSWORD_DEFAULT);
 $email = $_POST["email"];
@@ -27,7 +22,29 @@ $dob = date('Y-m-d', strtotime($_POST['DOB']));
 $country = $_POST["country"];
 $pictureurl = "URL";
 $logintime = date("Y-m-d H:i:s");
-$stmt->execute();
+
+try
+      {
+         $stmt1 = $conn->prepare("SELECT u_name,email FROM Users WHERE u_name = ? OR email= ?");
+         $stmt1->bind_param("ss", $userid, $email);
+		 
+		 $row=$stmt->fetch(PDO::FETCH_ASSOC);
+    
+         if($row['u_name']==$userid) {
+            $error[] = "sorry username already taken !";
+         }
+         else if($row['email']==$email) {
+            $error[] = "sorry email id already taken !";
+         }
+         else
+         {
+		 $stmt = $conn->prepare("INSERT INTO `socnet`.`Users` (`u_name`, `password`, `email`,`dob`,`Country`,`Picture`,`login_timestamp`) VALUES (?, ?, ?, ?, ?, ?, ?);");
+		 $stmt->bind_param("sssssss", $userid, $password, $email, $dob, $country, $pictureurl, $logintime);
+		 $stmt->execute();
+		 header( "Location: welcome.php" );
+		 }
+// set parameters and execute
+
 }
 ?>
 
@@ -48,7 +65,7 @@ $stmt->execute();
 
 <div class="container">
   <div class="form-container flip">
-	<form class = "login-form" action="welcome.php" method="post">
+	<form class = "login-form" action="" method="post">
 
 	<h3 class="title">Sign up here.</h3>
 		<div class="form-group" id="username">
@@ -322,8 +339,13 @@ $stmt->execute();
 
 	
       <div class="form-group">
-		<input type="submit" class="login-button" value = "Register" name = "submit">
-		
+		<input type="submit" class="login-button" value = "Register" name = "register">
+		<?php
+            if(isset($error))
+            {
+               foreach($error as $error)
+               {
+                  ?>
 		</div>
 		</form>
 	

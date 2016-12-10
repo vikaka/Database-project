@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_POST['submit'])){
+if(isset($_POST['login'])){
 
 $servername = "dbclassinstance.czhkgr2thr8b.us-east-2.rds.amazonaws.com:3306";
 $username = "visheshkakarala";
@@ -21,7 +21,7 @@ $userid = $_POST["user_id"];
 $password = password_hash($_POST["password"],PASSWORD_DEFAULT);
 $stmt -> execute();
 
-$sql = $conn->prepare("UPDATE Users SET logintime=NOW() WHERE u_name=?";);
+$sql = $conn->prepare("UPDATE Users SET logintime=NOW() WHERE u_name=?;");
 $sql->bind_param("s", $userid);
 
 
@@ -33,6 +33,7 @@ if($stmt->rowCount() > 0)
              {
                 $_SESSION['user_session'] = $userRow['user_id'];
                 $sql -> execute();
+				header( "Location: welcome.php" );
              }
              else
              {
@@ -69,7 +70,7 @@ else
 <h1 class = "header"> TravelPad </h1>
 <div class="container">
   <div class="form-container flip">
-	<form class = "login-form" action="welcome.php" method="post">
+	<form class = "login-form" action="" method="post">
 
 	<h3 class="title">Hello. Welcome Back !</h3>
 		<div class="form-group" id="username">
@@ -82,7 +83,7 @@ else
         <span class="tooltip password-tooltip">What's your password?</span>
       </div>
       <div class="form-group">
-		<input type="submit" class="login-button" value = "Login">
+		<input type="submit" class="login-button" value = "Login" name = "login">
 		
 		</div>
 		</form>
