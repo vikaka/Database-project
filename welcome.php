@@ -54,7 +54,7 @@ $run_location = mysqli_query($conn,$post_location);
 <html>
 <head>
 <link rel = "stylesheet" type="text/css" href ="css/welcomestyle.css">
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyDiTiqk3yK3W9-oV1hHQhQXCctlQIiLO18"></script>
         <script>
             var autocomplete;
             function initialize() {
