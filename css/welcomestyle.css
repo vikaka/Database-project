@@ -84,7 +84,7 @@ border-radius:20px;
 
 #content_timeline{
 	display:block;
-	float:right;
+	float:left;
 	width:1000px;
 	padding:20px;
 	height:300px;
@@ -115,10 +115,10 @@ font-family: 'Nunito', sans-serif;
 #posts {
 	
 	float:center;
-	width:300px;
+	width:500px;
 	}
 
-#posts p{margin-bottom:10px;
+.post-container{margin-bottom:10px;
 background-color: rgba(0, 90, 120, 0.7);
 border:1px solid black;
 	border-radius:5px;
@@ -129,3 +129,18 @@ border:1px solid black;
 	
 		}
 
+#post-image img{
+	float:left;
+	margin:0 auto;
+	width:30px;
+	height:30px;
+border:1px solid black; 
+border-radius:5px;}
+
+
+#title p{
+	padding:70px;
+	float:center;
+	width:100px;
+	
+}

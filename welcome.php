@@ -91,7 +91,7 @@ $run_location = mysqli_query($conn,$post_location);
 		$URL = $row['Picture'];
 		$country = $row['Country'];
 		echo "
-		<p><img src = 'https://s3.us-east-2.amazonaws.com/socnetvk1033/IMG_20160320_170422+%5B258682%5D+(2).jpg' width='200' height = '200'/><p>
+		<p><img src = 'getimage.php?varname=".$userid."' width='200' height = '200'/><p>
 		<p><strong> $userid </strong></p>
 		<p><strong> $country </strong></p>
 		<li><a href='profile.php'>Edit profile</a></li>
@@ -112,7 +112,7 @@ $run_location = mysqli_query($conn,$post_location);
 			<input type="hidden" data-geo="lat" value="" name="latitude">
 			<input type="hidden" data-geo="lng" value="" name="longitude">
 			<select id="visible" type="select" name="visible">
-				<option value="" selected="selected"></option>
+				
 				<option value="Public">Public</option>
 				<option value="fof">Friends of Friends</option>
 				<option value="Friends">Friends</option>
@@ -130,10 +130,23 @@ $run_location = mysqli_query($conn,$post_location);
 				
 				if (mysqli_num_rows($run_posts) > 0) {
 					while($posts = mysqli_fetch_assoc($run_posts)) {
-						echo "<p>" . $posts["u_name"]. "<br>" . $posts["content"]. "</P><br>
-					<form action = '' method='post' id = 'f'>
+						
+						echo "
+						<div class='post-container'>
+						<div id='post-image'>
+						<img src = 'getimage.php?varname=".$posts['u_name']."' width='200' height = '200'/>
+						</div>
+						<p id = 'title'><strong> ".$posts["u_name"]. "</strong></p>
+						<p> ".$posts["title"]." </p>
+						<p> ".$posts["content"]." </p>
+						<form action = '' method='post' id = 'f'>
 						<input type='submit' class='like-button' value = 'Like' name = 'like'>
-						<input type='submit' class='dislike-button' value = 'Dislike' name = 'Dislike'>";
+						<input type='submit' class='dislike-button' value = 'Dislike' name = 'Dislike'>
+						<input type ='text' name='comment' placeholder='Write a comment' size = '30'></input>
+						<input type='submit'  placeholder	 = 'Comment' name = 'Post_comment'></input>
+						</form>
+						</div>"
+						;
 					}
 				} else {
 					echo "No posts to display";
