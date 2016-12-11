@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if(isset($_POST['login'])){
 
 $servername = "dbclassinstance.czhkgr2thr8b.us-east-2.rds.amazonaws.com:3306";
@@ -25,14 +25,13 @@ $result = mysqli_query($conn, $stmt);
 $row = mysqli_fetch_assoc($result);
 
 
-$_SESSION['passwrd'] = $row["password"];
 
 if(mysqli_num_rows($result) > 0)
           {
 			  
              if($upass == $row["password"])
              {
-                $_SESSION['user_session'] = $userid;
+                $_SESSION['userid'] = $userid;
 				$sql = "UPDATE `socnet`.`Users` SET `login_timestamp`=Now() WHERE `u_name`= '$userid';";
 				$up_time = mysqli_query($conn,$sql);
                 header( "Location: welcome.php" );
