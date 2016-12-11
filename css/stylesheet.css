@@ -106,6 +106,24 @@ textarea:focus, input:focus, button:focus {
   padding: 10px 10px 10px 20px;
 }
 
+.display-id {
+  padding: 10px 10px 10px 20px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: normal;
+}
+
+.profile-display {
+  padding: 5px;
+  min-width: 50%;
+  height: 25px;
+  border-radius: 4px;
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  font-weight: normal;
+}
+
+
+
 .form-select {
   padding: 10px 10px 10px 20px;
 }

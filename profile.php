@@ -1,11 +1,9 @@
 <?php
 session_start();
-if ($_SESSION["userid"] != null){header("Location: index.php");
+if ($_SESSION["userid"] == null){header("Location: index.php");
 }
 else{
 
-
-if(isset($_POST['register'])){
 
 $servername = "dbclassinstance.czhkgr2thr8b.us-east-2.rds.amazonaws.com:3306";
 $username = "visheshkakarala";
@@ -19,75 +17,62 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+$userid = $_SESSION["userid"];
 
-$userid = $_POST["user_id"];
-$upass = hash('sha256',$_POST["password"]);
-$email = $_POST["email"];
-$dob = date('Y-m-d', strtotime($_POST['DOB']));
-$country = $_POST["country"];
-$pictureurl = "URL";
-$logintime = date("Y-m-d H:i:s");
+$get_profile = "select * from Users where u_name = '$userid'";
+$run_profile = mysqli_query($conn,$get_profile);
 
-         
-		 $stmt = $conn->prepare("INSERT INTO `socnet`.`Users` (`u_name`, `password`, `email`,`dob`,`Country`,`Picture`,`login_timestamp`) VALUES (?, ?, ?, ?, ?, ?, ?);");
-		 $stmt->bind_param("sssssss", $userid, $upass, $email, $dob, $country, $pictureurl, $logintime);
-		 if($stmt->execute())
-		 {
-		 header( "Location: welcome.php" );
-		 }
-		 else 
-		 {
-		 header( "Location: error.php" );	 
-		 }
-// set parameters and execute
+$profile = mysqli_fetch_assoc($run_profile);
+
+$email = $profile["email"];
+$dob = $profile["dob"];
+$country = $profile["Country"];
 
 
-}
+
 }
 ?>
-
-
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-  <title>TravelPad</title>
-	<script src="https://d3js.org/d3.v4.min.js" type="text/javascript"></script>
-	
-	<link rel = "stylesheet" type="text/css" href ="css/stylesheet.css">
-	<link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Nunito:400,300,700'>
-	
+<link rel = "stylesheet" type="text/css" href ="css/stylesheet.css">
+<link rel = "stylesheet" type="text/css" href ="css/welcomestyle.css">
+
 </head>
 <body>
-<h1 class = "header">Welcome to TravelPad !</h1>
+
+<ul class = "menu">
+  <li><a href="" class= "header1">Travelpad</a></li>
+  <li><a href="welcome.php">Home</a></li>
+  <li><a href="friends.php">Friends</a></li>
+  <li><a href="friendreq.php">Friend requests</a></li>
+  <li><a href="findfriends.php">Find Friends</a></li>
+  <li><a href="postsearch.php">Search posts</a></li>
+  <li><a href="">Blog Post</a></li>
+</ul>
 
 <div class="container">
   <div class="form-container flip">
 	<form class = "login-form" action="" method="post">
 
-	<h3 class="title">Sign up here.</h3>
-		<div class="form-group" id="username">
-        <input class="form-input" tooltip-class="username-tooltip" placeholder="Username" name = "user_id" pattern="[a-zA-Z0-9]+" required="true"></input>
-        <span id="username-tool"class="tooltip username-tooltip">Numbers and Alphabets Only</span>
-		</div>
+	<h3 class="title">Edit Profile</h3>
+		<div class="display-id" id="username">
+        <p class="profile-display"> <?php echo $userid ?></p>
+        </div>
 		
-		<div class="form-group" id="password">
-        <input type="password" class="form-input" name = "password" tooltip-class="password-tooltip" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" required="true"></input>
-        <span class="tooltip password-tooltip">Minimum 8[Must contain A-Z,a-z & 0-9]</span>
-      </div>
-	  
+		
 	<div class="form-group" id="email">
-        <input class="form-input" type = "email" tooltip-class="email-tooltip" placeholder="E-mail" name = "email" required="true"></input>
+        <input class="form-input" type = "email" tooltip-class="email-tooltip" placeholder="E-mail" name = "email" value = "<?php echo $email ?>" required="true"></input>
         <span id="email-tool"class="tooltip email-tooltip">Enter Your Email Id</span>
 		</div>
 		
 	<div class="form-group" id="DOB">
-        <input class="form-input" type="date" name = "DOB" tooltip-class="DOB-tooltip" required="true"></input>
+        <input class="form-input" type="date" name = "DOB" tooltip-class="DOB-tooltip" value = "<?php echo $dob ?>"required="true"></input>
         <span id="DOB-tool"class="tooltip DOB-tooltip">Select your DOB</span>
 	</div>
 
 	<div class="form-select" id="country">
-        <select id = "country" type = "select" class="form-input" tooltip-class="Country-tooltip" name = "country" required="true">
+        <select id = "country" type = "select" class="form-input" tooltip-class="Country-tooltip" value = "<?php echo $country ?>"name = "country" required="true">
 		<option value="" selected="selected"></option>
 		<option value="Afghanistan">Afghanistan</option>
     <option value="Albania">Albania</option>
@@ -364,8 +349,3 @@ $logintime = date("Y-m-d H:i:s");
 		
 		
 		</script>	
-
-	
-</body>
-</html>
-

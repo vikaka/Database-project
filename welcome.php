@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if ($_SESSION["userid"] == null){header("Location: index.html");
+}
+else{
+
 $servername = "dbclassinstance.czhkgr2thr8b.us-east-2.rds.amazonaws.com:3306";
 $username = "visheshkakarala";
 $password = "kakarala";
@@ -42,13 +46,14 @@ $run_image= mysqli_query($conn,$insert_image);
 $run_location = mysqli_query($conn,$post_location);
 
 }
+}
 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-<link rel = "stylesheet" type="text/css" href ="css/welcomestyle.css"></head>
+<link rel = "stylesheet" type="text/css" href ="css/welcomestyle.css">
 <script src="./js/jquery.min.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
 <script src="./js/jquery.geocomplete.min.js"></script>
@@ -61,14 +66,16 @@ $(function () {
 
 });
 </script>
-
+</head>
 <body>
 
 <ul>
   <li><a href="" class= "header">Travelpad</a></li>
-  <li><a href="">Home</a></li>
-  <li><a href="">Friends</a></li>
-  <li><a href="">Edit profile</a></li>
+  <li><a href="welcome.php">Home</a></li>
+  <li><a href="friends.php">Friends</a></li>
+  <li><a href="friendreq.php">Friend requests</a></li>
+  <li><a href="findfriends.php">Find Friends</a></li>
+  <li><a href="postsearch.php">Search posts</a></li>
   <li><a href="">Blog Post</a></li>
 </ul>
 <!---header ends---->
@@ -90,6 +97,8 @@ $(function () {
 		<p><img src = 'https://s3.us-east-2.amazonaws.com/socnetvk1033/IMG_20160320_170422+%5B258682%5D+(2).jpg' width='200' height = '200'/><p>
 		<p><strong> $userid </strong></p>
 		<p><strong> $country </strong></p>
+		<li><a href='profile.php'>Edit profile</a></li>
+		<li><a href='logout.php'>Logout</a></li>
 		";
 		?>
 		
@@ -124,7 +133,7 @@ $(function () {
 				
 				if (mysqli_num_rows($run_posts) > 0) {
 					while($posts = mysqli_fetch_assoc($run_posts)) {
-						echo "<p>" . $posts["u_name"]. "</p><p>" . $posts["content"]. "</P><br>
+						echo "<p>" . $posts["u_name"]. "<br>" . $posts["content"]. "</P><br>
 					<form action = '' method='post' id = 'f'>
 						<input type='submit' class='like-button' value = 'Like' name = 'like'>
 						<input type='submit' class='dislike-button' value = 'Dislike' name = 'Dislike'>";

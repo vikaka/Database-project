@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+if ($_SESSION["userid"] != null){header("Location: welcome.php");
+}
+else{
+
+
+
 if(isset($_POST['login'])){
 
 $servername = "dbclassinstance.czhkgr2thr8b.us-east-2.rds.amazonaws.com:3306";
@@ -50,7 +57,7 @@ else
 
 }
 
-
+}
 ?>
 
 <!DOCTYPE HTML>

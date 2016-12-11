@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if ($_SESSION["userid"] != null){header("Location: welcome.php");
+}
+else{}
+
+?>
+ 
+
+
 <!DOCTYPE HTML>
 <html>
 <head>
