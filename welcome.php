@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if ($_SESSION["userid"] == null){header("Location: index.html");
+if ($_SESSION["userid"] == null){header("Location: index.php");
 }
 else{
 
@@ -54,21 +54,18 @@ $run_location = mysqli_query($conn,$post_location);
 <html>
 <head>
 <link rel = "stylesheet" type="text/css" href ="css/welcomestyle.css">
-<script src="./js/jquery.min.js"></script>
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
-<script src="./js/jquery.geocomplete.min.js"></script>
-<script>
-$(function () {	
-	$("#location").geocomplete({
-	  details: ".geo-details",
-	  detailsAttribute: "data-geo"
-	});
-
-});
-</script>
-</head>
-<body>
-
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+        <script>
+            var autocomplete;
+            function initialize() {
+              autocomplete = new google.maps.places.Autocomplete(
+                  /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+                  { types: ['geocode'] });
+              google.maps.event.addListener(autocomplete, 'place_changed', function() {
+              });
+            }
+        </script></head>
+<body onload="initialize()">
 <ul>
   <li><a href="" class= "header">Travelpad</a></li>
   <li><a href="welcome.php">Home</a></li>
@@ -109,7 +106,7 @@ $(function () {
 			<h2> Where does your adventure take you today ?</h2>
 			<input type ="text" name="title" placeholder="Write a title.." size = "65"></input></br>
 			<textarea cols = "70" rows="4" name="content">What are you upto ?</textarea></input></br>
-			<input type="text" placeholder = "Add a location" name="location" id="location" class="location">
+			<input id="autocomplete" placeholder="Add Location" onFocus="geolocate()" name = "location" type="text">
 			<label for="files" class="btn">Select Image</label>
 			<input  type="file" name = "image" id="fileToUpload"></input></br>
 			<input type="hidden" data-geo="lat" value="" name="latitude">
