@@ -80,7 +80,7 @@ $postid = $_GET["postid"];
 						echo "
 						<div class='post-container'>
 						<div id='post-image'>
-						<object src = 'getimage.php?varname=".$posts['u_name']."' />
+						<img src = 'getimage.php?varname=".$posts['u_name']."' />
 						</div>
 						<p id = 'title'><strong> ".$posts["u_name"]. "</strong></p>
 						<p> ".$posts["content"]." </p>

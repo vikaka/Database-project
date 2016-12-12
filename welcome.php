@@ -36,19 +36,19 @@ $visible = $_POST["visible"];
 $imagename=$_FILES["image"]["name"]; 
 $imagetmp=addslashes(file_get_contents($_FILES['image']['tmp_name']));
 
-$insert_image="INSERT INTO `socnet`.`post_media` (`post_id`,`media`,`media_name`) VALUES ('$postid','$imagetmp','$imagename');";
 
-$run_image= mysqli_query($conn,$insert_image);
 
 
 
 
 $post_insert = "INSERT INTO `socnet`.`Post` (`post_id`, `u_name`, `content`, `timestamp`, `access`) VALUES ('$postid', '$userid', '$content', NOW(), '$visible');";
 $post_location = "INSERT INTO `socnet`.`post_location` (`Post_id`, `location_name`, `latitude`, `longitude`) VALUES ('$postid', '$location', '$latitude', '$longitude');";
+$insert_image="INSERT INTO `socnet`.`post_media` (`post_id`,`media`,`media_name`) VALUES ('$postid','$imagetmp','$imagename');";
 
 
 $run_post= mysqli_query($conn,$post_insert);
 $run_location = mysqli_query($conn,$post_location);
+$run_image= mysqli_query($conn,$insert_image);
 
 }
 }

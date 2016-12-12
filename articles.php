@@ -84,7 +84,7 @@ $articleid = $_GET["articleid"];
 						<p id = 'title'><strong> ".$articles["u_name"]. "</strong></p>
 						<p> ".$articles["title"]." </p>
 						<p> ".$articles["content"]." </p>
-						<object src = 'getarticleimage.php?postname=".$articleid."' width = '100' height ='100'/><br>
+						<img src = 'getarticleimage.php?postname=".$articleid."' width = '100' height ='100'/><br>
 						<p> at ".$location["location_name"]."</P>
 						<p> Visible to :".$articles["access"]." </p>
 						<form action = '' method='post' id = 'f'>
@@ -112,7 +112,7 @@ $articleid = $_GET["articleid"];
 							}
 						if(isset($_POST['Article_comment'])){
 							$comment = $_POST["comment"];
-							$add_comment = "INSERT INTO `socnet`.`article_comment` (`article_id`, `comment_type`, `u_name`, `timestamp`) VALUES ('$articleid', '$comment', '$userid' , NOW());";
+							$add_comment = "INSERT INTO `socnet`.`article_comment` (`article_id`, `comment`, `u_name`, `timestamp`) VALUES ('$articleid', '$comment', '$userid' , NOW());";
 							$run_comment = mysqli_query($conn,$add_comment);
 							}
 						
