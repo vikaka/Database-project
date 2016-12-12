@@ -82,7 +82,7 @@ if ($conn->connect_error) {
 		elseif($status == "pending"){echo"<p> pending request</p>";}
 				
 		else{echo "
-		<form metod = 'post' action = ''>
+		<form method = 'post' action = 'sendreq.php?varname=".$row['u_name']."'>
 		<input type='submit' class='login-button' value = 'Add as Friend' name = 'friend'>
 		</form>";}
 		
