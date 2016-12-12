@@ -39,37 +39,30 @@ if ($conn->connect_error) {
   <li><a href="blogpost.php">Blog Post</a></li>
 </ul>
 
-<h2 class="friends"> You're connected with </h2>
+<h2 class="friends"> You're friend requests </h2>
 <?php
 $sessionuser = $_SESSION["userid"];
 		
 		
-		$stmt = "select * from Users ";
+		$stmt = "select * from Friends where u_name2 = '$sessionuser' and status = 'pending' ";
 		$result = mysqli_query($conn, $stmt);
-
-			
-			
+		$i=0;
 		
 		while($row=mysqli_fetch_assoc($result)){
 		
-		$friend = $row['u_name'];	
-		if($row['u_name'] == $sessionuser){'';}
-		else{	
-		
-		include 'getfriendstatus.php';
+		$u_name1 = $row['u_name1'];
 			
-		if($status == "accepted"){echo "<div class='friend-container'>
+		echo "<a href = 'viewfriendreq.php?friendid=".$u_name1."'>
+		<div class='friend-container'>
 		<div id='post-image'>
-		<img src = 'getimage.php?varname=".$row['u_name']."' width = '100' height = '100' />
+		<img src = 'getimage.php?varname=".$row['u_name1']."' width = '100' height = '100' />
 		</div>
-		<p id = 'title'><strong> ".$row["u_name"]. "</strong></p>" ;}
-		
-				
-		else{'';}
-		
-		echo "</div>";
-		
+		<p id = 'title'><strong> ".$row["u_name1"]. "</strong></p>
+		</div>
+		</a>";
 		}
 		
-		} 
+				
+		
+		
 ?>		

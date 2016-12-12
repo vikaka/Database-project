@@ -79,7 +79,7 @@ $run_location = mysqli_query($conn,$post_location);
   <li><a href="friendreq.php">Friend requests</a></li>
   <li><a href="findfriends.php">Find Friends</a></li>
   <li><a href="postsearch.php">Search posts</a></li>
-  <li><a href="">Blog Post</a></li>
+  <li><a href="blogpost.php">Blog Post</a></li>
 </ul>
 <!---header ends---->
 
@@ -143,7 +143,8 @@ $run_location = mysqli_query($conn,$post_location);
 						$postsimage = mysqli_fetch_assoc($run_postsimage);
 						$postid = $posts['post_id'];
 						echo "
-						<div class='post-container'>
+						<a href= 'posts.php?postid=".$postid."'>
+						<div class='post-container' >
 						<div id='post-image'>
 						<img src = 'getimage.php?varname=".$posts['u_name']."' />
 						</div>
@@ -151,19 +152,10 @@ $run_location = mysqli_query($conn,$post_location);
 						<p> ".$posts["title"]." </p>
 						<p> ".$posts["content"]." </p>
 						<img src = 'getpostimage.php?postname=".$posts['post_id']."' width = '100' height ='100'/>
-						<form action = '' method='post' id = 'f'>
-						<input type='submit' class='login-button' value = 'Like' name = 'like'>
-						<input type='submit' class='login-button' value = 'Dislike' name = 'Dislike'><br>
-						<input type ='text' name='comment' placeholder='Write a comment' size = '30'></input>
-						<input type='submit'  class = 'login-button' name = 'Post_comment'></input>
-						</form>
-						</div>";
-						$like = "like";
+						</div>
+						</a>";
 						
-						if(isset($_POST['Like'])){
-							$add_like = "INSERT INTO `socnet`.`post_comment` (`post_id`, `comment_type`, `u_name`, `timestamp`) VALUES ($postid, $like, $userid , NOW());";
-							$run_like = mysqli_query($conn,$add_like);
-						}
+						
 					}
 				} else {
 					echo "No posts to display";

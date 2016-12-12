@@ -60,7 +60,7 @@ $run_insert = mysqli_query($conn,$insert_image);
   <li><a href="friendreq.php">Friend requests</a></li>
   <li><a href="findfriends.php">Find Friends</a></li>
   <li><a href="postsearch.php">Search posts</a></li>
-  <li><a href="">Blog Post</a></li>
+  <li><a href="blogpost.php">Blog Post</a></li>
 </ul>
 
 <div class="container">

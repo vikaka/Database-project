@@ -42,59 +42,51 @@ if ($conn->connect_error) {
 <!---header ends---->
 
 
-<h3 class = "friends">Search friends</h3> 
-   <p class="friends">If you know your friends user name you can search for them</p> 
+<h3 class = "friends">Search Posts</h3> 
+   <p class="friends">If you want to find something in particular </p> 
 	    <form  method="post" action=""  id="searchform"> 
-	      <input  type="text" name="name" pattern="[a-zA-Z0-9]+"> 
+	      <input  type="text" name="content" > 
       <input  type="submit" name="submit" value="Search"> 
     </form> 
 	</div class = "content">
+	<div id ="posts">
+		
 	<?php
-	if(isset($_POST['submit'])){ 
+		if(isset($_POST['submit'])){ 
 	
 		$sessionuser = $_SESSION["userid"];
 		
-		$userid = $_POST['name'];
-
-		$stmt = "select * from Users where u_name like '%$userid%'";
-		$result = mysqli_query($conn, $stmt);
-
-			
-			
-		
-		while($row=mysqli_fetch_assoc($result)){
-		
-		$friend = $row['u_name'];	
-		if($row['u_name'] == $sessionuser){'';}
-		else{	
-			
-			
-		echo "<div class='friend-container'>
-		<div id='post-image'>
-		<img src = 'getimage.php?varname=".$row['u_name']."' width = '100' height = '100' />
-		</div>
-		<p id = 'title'><strong> ".$row["u_name"]. "</strong></p>";
-		
-		include 'getfriendstatus.php';
-		
-		if($status == "accepted"){echo "<p> Friend</p>" ;}
-		
-		elseif($status == "pending"){echo"<p> pending request</p>";}
+		$cont = $_POST['content'];
+				$get_posts = "select * from Post where title like '%$cont%' or content like '%$cont%'";
+				$run_posts = mysqli_query($conn,$get_posts);
 				
-		else{echo "
-		<form metod = 'post' action = ''>
-		<input type='submit' class='login-button' value = 'Add as Friend' name = 'friend'>
-		</form>";}
-		
-		unset($status);
-		echo "</div>";
-		
-		}
-		
-		} 
-		}
+				
+				
+				if (mysqli_num_rows($run_posts) > 0) {
+					while($posts = mysqli_fetch_assoc($run_posts)) {
+						$postid = $posts['post_id'];
+						echo "
+						<a href= 'posts.php?postid=".$postid."'>
+						<div class='post-container' >
+						<div id='post-image'>
+						<img src = 'getimage.php?varname=".$posts['u_name']."' />
+						</div>
+						<p id = 'title'><strong> ".$posts["u_name"]. "</strong></p>
+						<p> ".$posts["title"]." </p>
+						<p> ".$posts["content"]." </p>
+						<img src = 'getpostimage.php?postname=".$posts['post_id']."' width = '100' height ='100'/>
+						</div>
+						</a>";
+						
+						
+					}
+				} else {
+					echo "No posts to display";
+				}
+				}
+				?>
+				</div>
+				</body>
+				</html>
 	
-	?>
-	</div>
-  </body> 
-	</html>
+	
