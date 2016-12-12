@@ -130,6 +130,9 @@ border:1px solid black;
 	
 		}
 
+		
+		
+		
 #post-image img{
 	float:left;
 	margin:0 auto;
@@ -139,6 +142,7 @@ border:1px solid black;
 border-radius:5px;
 background-image: url(http://d1znuvnwgfslq5.cloudfront.net/assets/default_avatar-d03d237e856098df8d791f6b6c4a0393.png?1480118401326);}
 
+}
 
 #title p{
 	padding:70px;

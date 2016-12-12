@@ -61,7 +61,7 @@ if ($conn->connect_error) {
 		
 				if($_POST['type'] == 'Posts'){
 				$cont = $_POST['content'];
-				$get_posts = "select * from Post where content like '%$cont%'";
+				$get_posts = "call posts_search('$sessionuser','%$cont%');";
 				$run_posts = mysqli_query($conn,$get_posts);
 				
 				
@@ -88,7 +88,7 @@ if ($conn->connect_error) {
 				}
 					else{
 				$cont = $_POST['content'];
-				$get_articles = "select * from Article where title like '%$cont%' and content like '%$cont%'";
+				$get_articles = "call articles_search('$sessionuser','%$cont%');";
 				$run_articles = mysqli_query($conn,$get_articles);
 				
 				
