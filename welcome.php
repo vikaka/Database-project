@@ -25,7 +25,6 @@ if(isset($_POST['Post_timeline'])){
  
 
 $userid = $_SESSION["userid"];
-$title = $_POST["title"];
 $content = $_POST["content"];
 $location = $_POST["location"];	
 $latitude = $_POST["latitude"];
@@ -39,7 +38,7 @@ $imagetmp=addslashes(file_get_contents($_FILES['image']['tmp_name']));
 
 
 
-$post_insert = "INSERT INTO `socnet`.`Post` (`post_id`, `u_name`, `title`, `content`, `timestamp`, `access`) VALUES ('$postid', '$userid', '$title', '$content', NOW(), '$visible');";
+$post_insert = "INSERT INTO `socnet`.`Post` (`post_id`, `u_name`, `content`, `timestamp`, `access`) VALUES ('$postid', '$userid', '$content', NOW(), '$visible');";
 $insert_image="INSERT INTO `socnet`.`post_media` (`post_id`,`media`,`media_name`) VALUES ('$postid','$imagetmp','$imagename');";
 $post_location = "INSERT INTO `socnet`.`post_location` (`Post_id`, `location_name`, `latitude`, `longitude`) VALUES ('$postid', '$location', '$latitude', '$longitude');";
 
@@ -110,7 +109,6 @@ $run_location = mysqli_query($conn,$post_location);
 	<div id = "content_timeline">
 			<form action = "" method="post" id = "f" enctype="multipart/form-data">
 			<h2> Where does your adventure take you today ?</h2>
-			<input type ="text" name="title" placeholder="Write a title.." size = "65"></input></br>
 			<textarea cols = "70" rows="4" name="content">What are you upto ?</textarea></input></br>
 			<input id="autocomplete" placeholder="Add Location" onFocus="geolocate()" name = "location" type="text">
 			<label for="files" class="btn">Select Image</label>
@@ -131,16 +129,13 @@ $run_location = mysqli_query($conn,$post_location);
 			<h3> Look what your friends are upto </h3>
 				<?php
 				
-				$get_posts = "select * from Post";
+				$get_posts = "call posts_list('$userid');";
 				$run_posts = mysqli_query($conn,$get_posts);
 				
-				$get_postsimage = "select * from post_media";
-				$run_postsimage = mysqli_query($conn,$get_postsimage);
 				
 				
 				if (mysqli_num_rows($run_posts) > 0) {
 					while($posts = mysqli_fetch_assoc($run_posts)) {
-						$postsimage = mysqli_fetch_assoc($run_postsimage);
 						$postid = $posts['post_id'];
 						echo "
 						<a href= 'posts.php?postid=".$postid."'>
@@ -149,7 +144,6 @@ $run_location = mysqli_query($conn,$post_location);
 						<img src = 'getimage.php?varname=".$posts['u_name']."' />
 						</div>
 						<p id = 'title'><strong> ".$posts["u_name"]. "</strong></p>
-						<p> ".$posts["title"]." </p>
 						<p> ".$posts["content"]." </p>
 						<img src = 'getpostimage.php?postname=".$posts['post_id']."' width = '100' height ='100'/>
 						</div>
