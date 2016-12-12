@@ -32,32 +32,28 @@ $country = $profile["Country"];
 
 if(isset($_POST['update'])){
 
-if(isset($_FILE["profilepic"])){
 $imagename=$_FILES["profilepic"]["name"]; 
 $imagetmp=addslashes(file_get_contents($_FILES['profilepic']['tmp_name']));
 
 $insert_image="UPDATE `socnet`.`Users` SET `Picture` = '$imagetmp' where u_name = '$userid' ;";
-$run_insert = mysqli_query($conn,$insert_image);}
+$run_insert = mysqli_query($conn,$insert_image);
 
-if(isset($_POST['email'])){
 
-$email_update = $_POST["email"];}
+$email_update = $_POST["email"];
 $update_email="UPDATE `socnet`.`Users` SET `email` = '$email_update' where u_name = '$userid' ;";
 $run_update = mysqli_query($conn,$update_email);
 
 
 
-if(isset($_POST['DOB'])){
 $DOB_update = date('Y-m-d', strtotime($_POST['DOB']));
 $update_DOB="UPDATE `socnet`.`Users` SET `dob` = '$DOB_update' where u_name = '$userid' ;";
 $run_update = mysqli_query($conn,$update_DOB);
-}
 
-if(isset($_POST['country'])){
+
 $country_update = $_POST['country'];
 $update_country="UPDATE `socnet`.`Users` SET `Country` = '$country_update' where u_name = '$userid' ;";
 $run_update = mysqli_query($conn,$update_country);
-}
+
 
 
 
@@ -357,7 +353,7 @@ $run_update = mysqli_query($conn,$update_country);
 	</div>
 	
 	<div class="form-group" id="DOB">
-    <input class= "form-input" type="file" name = "profiepic" tooltip-class="profilepic-tooltip" id="fileToUpload"></input>
+    <input class= "form-input" type="file" name = "profilepic" tooltip-class="profilepic-tooltip" id="fileToUpload"></input>
 	<span id="profilepic-tool"class="tooltip profilepic-tooltip">upload profile picture</span>
 	</div>
 	
