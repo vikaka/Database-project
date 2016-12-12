@@ -45,12 +45,12 @@ if(mysqli_num_rows($result) > 0)
              }
              else
              {
-                header( "Location: errorlogin.php" );
+                header( "Location: errorpassword.php" );
              }
           }
 else
 	{
-				header( "Location: errorlogin.php" );
+				header( "Location: erroruserid.php" );
 	
 	}
 

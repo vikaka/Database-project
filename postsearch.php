@@ -45,7 +45,10 @@ if ($conn->connect_error) {
 <h3 class = "friends">Search Posts</h3> 
    <p class="friends">If you want to find something in particular </p> 
 	    <form  method="post" action=""  id="searchform"> 
-	      <input  type="text" name="content" > 
+	     <select type = "select" name = "type" >
+		<option value="Posts"selected> Activity Posts</option>
+		<option value="Articles">Blog Posts</option></select><br> 
+		  <input  type="text" name="content" > 
       <input  type="submit" name="submit" value="Search"> 
     </form> 
 	</div class = "content">
@@ -56,8 +59,9 @@ if ($conn->connect_error) {
 	
 		$sessionuser = $_SESSION["userid"];
 		
-		$cont = $_POST['content'];
-				$get_posts = "select * from Post where title like '%$cont%' or content like '%$cont%'";
+				if($_POST['type'] == 'Posts'){
+				$cont = $_POST['content'];
+				$get_posts = "select * from Post where content like '%$cont%'";
 				$run_posts = mysqli_query($conn,$get_posts);
 				
 				
@@ -72,18 +76,50 @@ if ($conn->connect_error) {
 						<img src = 'getimage.php?varname=".$posts['u_name']."' />
 						</div>
 						<p id = 'title'><strong> ".$posts["u_name"]. "</strong></p>
-						<p> ".$posts["title"]." </p>
 						<p> ".$posts["content"]." </p>
 						<img src = 'getpostimage.php?postname=".$posts['post_id']."' width = '100' height ='100'/>
 						</div>
 						</a>";
-						
+					}
 						
 					}
-				} else {
+					else {
 					echo "No posts to display";
 				}
 				}
+					else{
+				$cont = $_POST['content'];
+				$get_articles = "select * from Article where title like '%$cont%' and content like '%$cont%'";
+				$run_articles = mysqli_query($conn,$get_articles);
+				
+				
+				
+				if (mysqli_num_rows($run_articles) > 0) {
+					while($articles = mysqli_fetch_assoc($run_articles)) {
+						$articleid = $articles['article_id'];
+						echo "
+						<a href= 'articles.php?articleid=".$articleid."'>
+						<div class='post-container' >
+						<div id='post-image'>
+						<img src = 'getimage.php?varname=".$articles['u_name']."' />
+						</div>
+						<p id = 'title'><strong> ".$articles["u_name"]. "</strong></p>
+						<p> ".$articles["title"]." </p>
+						<p> ".$articles["content"]." </p>
+						<img src = 'getarticleimage.php?articlename=".$articles['article_id']."' width = '100' height ='100'/>
+						</div>
+						</a>";
+					}
+						
+					}
+				else {
+					echo "No posts to display";
+				}
+				}
+				
+		}		
+		
+				
 				?>
 				</div>
 				</body>

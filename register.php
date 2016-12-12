@@ -33,7 +33,7 @@ $logintime = date("Y-m-d H:i:s");
 		 $stmt->bind_param("sssssss", $userid, $upass, $email, $dob, $country, $pictureurl, $logintime);
 		 if($stmt->execute())
 		 {
-		 header( "Location: welcome.php" );
+		 header( "Location: successregister.php" );
 		 }
 		 else 
 		 {
@@ -68,12 +68,12 @@ $logintime = date("Y-m-d H:i:s");
 	<h3 class="title">Sign up here.</h3>
 		<div class="form-group" id="username">
         <input class="form-input" tooltip-class="username-tooltip" placeholder="Username" name = "user_id" pattern="[a-zA-Z0-9]+" required="true"></input>
-        <span id="username-tool"class="tooltip username-tooltip">Numbers and Alphabets Only</span>
+        <span id="username-tool"class="tooltip username-tooltip">Numbers and Alphabets Only, No Spaces</span>
 		</div>
 		
 		<div class="form-group" id="password">
         <input type="password" class="form-input" name = "password" tooltip-class="password-tooltip" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" required="true"></input>
-        <span class="tooltip password-tooltip">Minimum 8[Must contain A-Z,a-z & 0-9]</span>
+        <span class="tooltip password-tooltip">Min4, Max 8[Must contain A-Z,a-z & 0-9]</span>
       </div>
 	  
 	<div class="form-group" id="email">
@@ -208,7 +208,7 @@ $logintime = date("Y-m-d H:i:s");
     <option value="Kyrgyzstan">Kyrgyzstan</option>
     <option value="Lao">Lao People's Democratic Republic</option>
     <option value="Latvia">Latvia</option>
-    <option value="Lebanon" selected>Lebanon</option>
+    <option value="Lebanon">Lebanon</option>
     <option value="Lesotho">Lesotho</option>
     <option value="Liberia">Liberia</option>
     <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
@@ -313,7 +313,7 @@ $logintime = date("Y-m-d H:i:s");
     <option value="Ukraine">Ukraine</option>
     <option value="United Arab Emirates">United Arab Emirates</option>
     <option value="United Kingdom">United Kingdom</option>
-    <option value="United States">United States</option>
+    <option value="United States" selected>United States</option>
     <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
     <option value="Uruguay">Uruguay</option>
     <option value="Uzbekistan">Uzbekistan</option>

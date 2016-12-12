@@ -93,7 +93,6 @@ $run_location = mysqli_query($conn,$post_location);
 		$run_user = mysqli_query($conn,$get_user);
 		$row = mysqli_fetch_array($run_user);
 		
-		$URL = $row['Picture'];
 		$country = $row['Country'];
 		echo "
 		<p><img src = 'getimage.php?varname=".$userid."' width='200' height = '200'/><p>
@@ -138,7 +137,7 @@ $run_location = mysqli_query($conn,$post_location);
 					while($posts = mysqli_fetch_assoc($run_posts)) {
 						$postid = $posts['post_id'];
 						echo "
-						<a href= 'posts.php?postid=".$postid."'>
+						<a href= 'posts.php?postid=".$postid."' >
 						<div class='post-container' >
 						<div id='post-image'>
 						<img src = 'getimage.php?varname=".$posts['u_name']."' />
