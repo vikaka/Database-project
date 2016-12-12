@@ -54,7 +54,7 @@ $run_insert = mysqli_query($conn,$insert_image);
 <body>
 
 <ul class = "menu">
-  <li><a href="" class= "header1">Travelpad</a></li>
+  <li><a href="" class= "header">Travelpad</a></li>
   <li><a href="welcome.php">Home</a></li>
   <li><a href="friends.php">Friends</a></li>
   <li><a href="friendreq.php">Friend requests</a></li>
@@ -82,8 +82,11 @@ $run_insert = mysqli_query($conn,$insert_image);
         <input class="form-input" type="date" name = "DOB" tooltip-class="DOB-tooltip" value = "<?php echo $dob ?>"required="true"></input>
         <span id="DOB-tool"class="tooltip DOB-tooltip">Select your DOB</span>
 	</div>
-
-	<input  type="file" name = "profilepic" id="fileToUpload"></input></br>	
+	
+	<div class="form-group" id="DOB">
+    <input class= "form-input" type="file" name = "profiepic" tooltip-class="profilepic-tooltip" id="fileToUpload"></input>
+	<span id="profilepic-tool"class="tooltip profilepic-tooltip">upload profile picture</span>
+	</div>
 	
 		
 
