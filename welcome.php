@@ -32,12 +32,14 @@ $longitude = $_POST["longitude"];
 $postid = uniqid($_SESSION["userid"]);
 $visible = $_POST["visible"];
 
-if(isset($_FILES["image"])){
+
 $imagename=$_FILES["image"]["name"]; 
 $imagetmp=addslashes(file_get_contents($_FILES['image']['tmp_name']));
+
 $insert_image="INSERT INTO `socnet`.`post_media` (`post_id`,`media`,`media_name`) VALUES ('$postid','$imagetmp','$imagename');";
+
 $run_image= mysqli_query($conn,$insert_image);
-}
+
 
 
 
