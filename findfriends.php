@@ -69,25 +69,13 @@ if ($conn->connect_error) {
 		else{	
 			
 			
-		echo "<div class='friend-container'>
+		echo "<a href = 'sendreq.php?varname=".$row['u_name']."'>
+		<div class='friend-container'>
 		<div id='post-image'>
 		<img src = 'getimage.php?varname=".$row['u_name']."' width = '100' height = '100' />
 		</div>
-		<p id = 'title'><strong> ".$row["u_name"]. "</strong></p>";
-		
-		include 'getfriendstatus.php';
-		
-		if($status == "accepted"){echo "<p> Friend</p>" ;}
-		
-		elseif($status == "pending"){echo"<p> pending request</p>";}
-				
-		else{echo "
-		<form method = 'post' action = 'sendreq.php?varname=".$row['u_name']."'>
-		<input type='submit' class='login-button' value = 'Add as Friend' name = 'friend'>
-		</form>";}
-		
-		unset($status);
-		echo "</div>";
+		<p id = 'title'><strong> ".$row["u_name"]. "</strong></p>
+		</div>";
 		
 		}
 		
