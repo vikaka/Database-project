@@ -16,11 +16,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$article_id = $_GET["articlename"];
+$article_id = $_GET["postname"];
 
 
 
-$stmt = "select * from article_media where article_id = '$article_id'";
+$stmt = "select media from article_media where article_id = '$article_id'";
 $result = mysqli_query($conn, $stmt);
 
 

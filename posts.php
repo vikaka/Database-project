@@ -84,7 +84,7 @@ $postid = $_GET["postid"];
 						</div>
 						<p id = 'title'><strong> ".$posts["u_name"]. "</strong></p>
 						<p> ".$posts["content"]." </p>
-						<object src = 'getpostimage.php?postname=".$posts['post_id']."' width = '100' height ='100'/>
+						<img src = 'getpostimage.php?postname=".$posts['post_id']."' width = '100' height ='100'/>
 						<p> at ".$location["location_name"]."</P>
 						<p> Visible to :".$posts["access"]." </p>
 						<form action = '' method='post' id = 'f'>
@@ -132,7 +132,7 @@ $postid = $_GET["postid"];
 						echo "
 						<div class='post-container'>
 						<div id='post-image'>
-						<object src = 'getimage.php?varname=".$comments['u_name']."' />
+						<img src = 'getimage.php?varname=".$comments['u_name']."' />
 						</div>
 						
 						<p id = 'title'><strong> ".$comments["u_name"]. "</strong></p><br>
