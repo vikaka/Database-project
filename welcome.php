@@ -18,6 +18,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+
+
+
 if(isset($_POST['Post_timeline'])){
  
 
@@ -54,6 +57,9 @@ $run_location = mysqli_query($conn,$post_location);
 <html>
 <head>
 <link rel = "stylesheet" type="text/css" href ="css/welcomestyle.css">
+<link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Nunito:400,300,700'>
+<link rel = "stylesheet" type="text/css" href ="css/stylesheet.css">
+	
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyDiTiqk3yK3W9-oV1hHQhQXCctlQIiLO18"></script>
         <script>
             var autocomplete;
@@ -118,7 +124,7 @@ $run_location = mysqli_query($conn,$post_location);
 				<option value="Friends">Friends</option>
 				<option value="onlyme">Only Me</option>
 			</select>	
-			<input type='submit' class='Postbutton' value = 'Post to timeline' name = 'Post_timeline'></input></br>
+			<input type='submit' class='postbutton' value = 'Post to timeline' name = 'Post_timeline'></input></br>
 			
 			</form>
 			<div id ="posts">
@@ -128,25 +134,36 @@ $run_location = mysqli_query($conn,$post_location);
 				$get_posts = "select * from Post";
 				$run_posts = mysqli_query($conn,$get_posts);
 				
+				$get_postsimage = "select * from post_media";
+				$run_postsimage = mysqli_query($conn,$get_postsimage);
+				
+				
 				if (mysqli_num_rows($run_posts) > 0) {
 					while($posts = mysqli_fetch_assoc($run_posts)) {
-						
+						$postsimage = mysqli_fetch_assoc($run_postsimage);
+						$postid = $posts['post_id'];
 						echo "
 						<div class='post-container'>
 						<div id='post-image'>
-						<img src = 'getimage.php?varname=".$posts['u_name']."' width='200' height = '200'/>
+						<img src = 'getimage.php?varname=".$posts['u_name']."' />
 						</div>
 						<p id = 'title'><strong> ".$posts["u_name"]. "</strong></p>
 						<p> ".$posts["title"]." </p>
 						<p> ".$posts["content"]." </p>
+						<img src = 'getpostimage.php?postname=".$posts['post_id']."' width = '100' height ='100'/>
 						<form action = '' method='post' id = 'f'>
-						<input type='submit' class='like-button' value = 'Like' name = 'like'>
-						<input type='submit' class='dislike-button' value = 'Dislike' name = 'Dislike'>
+						<input type='submit' class='login-button' value = 'Like' name = 'like'>
+						<input type='submit' class='login-button' value = 'Dislike' name = 'Dislike'><br>
 						<input type ='text' name='comment' placeholder='Write a comment' size = '30'></input>
-						<input type='submit'  placeholder	 = 'Comment' name = 'Post_comment'></input>
+						<input type='submit'  class = 'login-button' name = 'Post_comment'></input>
 						</form>
-						</div>"
-						;
+						</div>";
+						$like = "like";
+						
+						if(isset($_POST['Like'])){
+							$add_like = "INSERT INTO `socnet`.`post_comment` (`post_id`, `comment_type`, `u_name`, `timestamp`) VALUES ($postid, $like, $userid , NOW());";
+							$run_like = mysqli_query($conn,$add_like);
+						}
 					}
 				} else {
 					echo "No posts to display";

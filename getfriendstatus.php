@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 
 $servername = "dbclassinstance.czhkgr2thr8b.us-east-2.rds.amazonaws.com:3306";
 $username = "visheshkakarala";
@@ -16,19 +14,19 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$u_name = $_GET["varname"];
+
+$sessionuser = $_SESSION["userid"];
 
 
 
-$stmt = "select * from Users where u_name = '$u_name'";
-$result = mysqli_query($conn, $stmt);
+$check_status = "call friendstatus('$sessionuser','$friend');";
+$result_status = mysqli_query($conn, $check_status);
+$run_status = mysqli_fetch_assoc($result_status);
 
-
-$row = mysqli_fetch_array($result);
-
-header("Content-type: image/jpeg");
-  echo $row['Picture'];
-
+if(mysqli_num_rows($result_status)==1){$status = $run_status['status'];}
+else{
+$status = "error";
+}
 
 
 ?>
