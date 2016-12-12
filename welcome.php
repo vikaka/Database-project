@@ -32,19 +32,20 @@ $longitude = $_POST["longitude"];
 $postid = uniqid($_SESSION["userid"]);
 $visible = $_POST["visible"];
 
-
+if(isset($_FILES["image"])){
 $imagename=$_FILES["image"]["name"]; 
 $imagetmp=addslashes(file_get_contents($_FILES['image']['tmp_name']));
+$insert_image="INSERT INTO `socnet`.`post_media` (`post_id`,`media`,`media_name`) VALUES ('$postid','$imagetmp','$imagename');";
+$run_image= mysqli_query($conn,$insert_image);
+}
 
 
 
 $post_insert = "INSERT INTO `socnet`.`Post` (`post_id`, `u_name`, `content`, `timestamp`, `access`) VALUES ('$postid', '$userid', '$content', NOW(), '$visible');";
-$insert_image="INSERT INTO `socnet`.`post_media` (`post_id`,`media`,`media_name`) VALUES ('$postid','$imagetmp','$imagename');";
 $post_location = "INSERT INTO `socnet`.`post_location` (`Post_id`, `location_name`, `latitude`, `longitude`) VALUES ('$postid', '$location', '$latitude', '$longitude');";
 
 
 $run_post= mysqli_query($conn,$post_insert);
-$run_image= mysqli_query($conn,$insert_image);
 $run_location = mysqli_query($conn,$post_location);
 
 }
@@ -131,6 +132,8 @@ $run_location = mysqli_query($conn,$post_location);
 				$get_posts = "call posts_list('$userid');";
 				$run_posts = mysqli_query($conn,$get_posts);
 				
+				$get_media = "select count(*) from post_media;";
+				$run_media = mysqli_query($conn,$get_media);
 				
 				
 				if (mysqli_num_rows($run_posts) > 0) {
@@ -144,7 +147,6 @@ $run_location = mysqli_query($conn,$post_location);
 						</div>
 						<p id = 'title'><strong> ".$posts["u_name"]. "</strong></p>
 						<p> ".$posts["content"]." </p>
-						<img src = 'getpostimage.php?postname=".$posts['post_id']."' width = '100' height ='100'/>
 						</div>
 						</a>";
 						

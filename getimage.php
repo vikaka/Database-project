@@ -29,6 +29,4 @@ $row = mysqli_fetch_array($result);
 header("Content-type: image/jpeg");
   echo $row['Picture'];
 
-
-
 ?>

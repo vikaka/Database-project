@@ -128,7 +128,6 @@ $run_location = mysqli_query($conn,$article_location);
 						<p id = 'title'><strong> ".$articles["u_name"]. "</strong></p>
 						<p> ".$articles["title"]." </p>
 						<p> ".$articles["content"]." </p>
-						<img src = 'getarticleimage.php?articlename=".$articles['article_id']."' width = '100' height ='100'/>
 						</div>
 						</a>";
 						

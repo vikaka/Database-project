@@ -80,11 +80,11 @@ $postid = $_GET["postid"];
 						echo "
 						<div class='post-container'>
 						<div id='post-image'>
-						<img src = 'getimage.php?varname=".$posts['u_name']."' />
+						<object src = 'getimage.php?varname=".$posts['u_name']."' />
 						</div>
 						<p id = 'title'><strong> ".$posts["u_name"]. "</strong></p>
 						<p> ".$posts["content"]." </p>
-						<img src = 'getpostimage.php?postname=".$posts['post_id']."' width = '100' height ='100'/>
+						<object src = 'getpostimage.php?postname=".$posts['post_id']."' width = '100' height ='100'/>
 						<p> ".$location["location_name"]."</P>
 						<p> ".$posts["access"]." </p>
 						<form action = '' method='post' id = 'f'>
@@ -132,7 +132,7 @@ $postid = $_GET["postid"];
 						echo "
 						<div class='post-container'>
 						<div id='post-image'>
-						<img src = 'getimage.php?varname=".$comments['u_name']."' />
+						<object src = 'getimage.php?varname=".$comments['u_name']."' />
 						</div>
 						
 						<p id = 'title'><strong> ".$comments["u_name"]. "</strong></p><br>

@@ -77,7 +77,6 @@ if ($conn->connect_error) {
 						</div>
 						<p id = 'title'><strong> ".$posts["u_name"]. "</strong></p>
 						<p> ".$posts["content"]." </p>
-						<img src = 'getpostimage.php?postname=".$posts['post_id']."' width = '100' height ='100'/>
 						</div>
 						</a>";
 					}
@@ -106,7 +105,6 @@ if ($conn->connect_error) {
 						<p id = 'title'><strong> ".$articles["u_name"]. "</strong></p>
 						<p> ".$articles["title"]." </p>
 						<p> ".$articles["content"]." </p>
-						<img src = 'getarticleimage.php?articlename=".$articles['article_id']."' width = '100' height ='100'/>
 						</div>
 						</a>";
 					}

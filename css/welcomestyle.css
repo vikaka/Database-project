@@ -80,6 +80,7 @@ li a:hover:not(.active) {
 	height:200px;
 border:2px solid black; 
 border-radius:20px;
+background-image: url(http://d1znuvnwgfslq5.cloudfront.net/assets/default_avatar-d03d237e856098df8d791f6b6c4a0393.png?1480118401326);
 }
 
 #content_timeline{
@@ -135,7 +136,8 @@ border:1px solid black;
 	width:30px;
 	height:30px;
 border:1px solid black; 
-border-radius:5px;}
+border-radius:5px;
+background-image: url(http://d1znuvnwgfslq5.cloudfront.net/assets/default_avatar-d03d237e856098df8d791f6b6c4a0393.png?1480118401326);}
 
 
 #title p{

@@ -84,7 +84,7 @@ $articleid = $_GET["articleid"];
 						<p id = 'title'><strong> ".$articles["u_name"]. "</strong></p>
 						<p> ".$articles["title"]." </p>
 						<p> ".$articles["content"]." </p>
-						<img src = 'getpostimage.php?postname=".$articleid."' width = '100' height ='100'/><br>
+						<object src = 'getpostimage.php?postname=".$articleid."' width = '100' height ='100'/><br>
 						<p> ".$location["location_name"]."</P>
 						<p> ".$articles["access"]." </p>
 						<form action = '' method='post' id = 'f'>

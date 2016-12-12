@@ -25,11 +25,10 @@ $upass = hash('sha256',$_POST["password"]);
 $email = $_POST["email"];
 $dob = date('Y-m-d', strtotime($_POST['DOB']));
 $country = $_POST["country"];
-$pictureurl = "URL";
 $logintime = date("Y-m-d H:i:s");
 
          
-		 $stmt = $conn->prepare("INSERT INTO `socnet`.`Users` (`u_name`, `password`, `email`,`dob`,`Country`,`Picture`,`login_timestamp`) VALUES (?, ?, ?, ?, ?, ?, ?);");
+		 $stmt = $conn->prepare("INSERT INTO `socnet`.`Users` (`u_name`, `password`, `email`,`dob`,`Country`,`login_timestamp`) VALUES (?, ?, ?, ?, ?, ?);");
 		 $stmt->bind_param("sssssss", $userid, $upass, $email, $dob, $country, $pictureurl, $logintime);
 		 if($stmt->execute())
 		 {
