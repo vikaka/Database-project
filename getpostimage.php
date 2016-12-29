@@ -3,7 +3,7 @@
 session_start();
 
 
-$servername = "dbclassinstance.czhkgr2thr8b.us-east-2.rds.amazonaws.com:3306";
+$servername = "localhost:3306";
 $username = "visheshkakarala";
 $password = "kakarala";
 $dbname = "socnet";
